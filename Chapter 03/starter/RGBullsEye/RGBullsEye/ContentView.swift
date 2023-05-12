@@ -44,14 +44,13 @@ struct ContentView: View {
             VStack {
                 ColorCircle(rgb: game.target, size: 200)
                 if !showScore {
-                    Text("R: ??? G: ??? B: ???")
+                    BevelText(text: "R: ??? G: ??? B: ???")
                         .padding()
                 } else {
-                    Text(game.target.intString)
-                        .padding()
+                    BevelText(text: game.target.intString).padding()
                 }
                 ColorCircle(rgb: guess, size: 200)
-                Text(guess.intString)
+                BevelText(text: guess.intString)
                     .padding()
                 ColorSlider(value: $guess.red, trackColor: .red)
                 ColorSlider(value: $guess.green, trackColor: .green)
@@ -60,6 +59,7 @@ struct ContentView: View {
                     self.showScore = true
                     self.game.check(guess: guess)
                 }
+                .buttonStyle(NeuButtonStyle(width: 327, height: 48))
                 .alert(isPresented: $showScore) {
                     Alert(
                         title: Text("Your Score"),
@@ -70,6 +70,7 @@ struct ContentView: View {
                         })
                 }
             }
+                .font(.headline)
         }
     }
 }
@@ -91,5 +92,6 @@ struct ColorSlider: View {
             Text("255")
         }
         .padding(.horizontal)
+        .font(.subheadline)
     }
 }
